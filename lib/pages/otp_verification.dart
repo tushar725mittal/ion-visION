@@ -29,6 +29,7 @@ class _OtpPageState extends State<OtpPage> {
     var res = await emailAuth!.validateOtp(recipientMail: widget.e, userOtp: otp);
     if(res){
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: "OTP Verified".text.make()));
+      await Future.delayed(Duration(milliseconds: 500));
       await context.vxNav.clearAndPush(Uri.parse(MyRoutes.homeRoute));
     }
     else{
@@ -98,10 +99,6 @@ class _OtpPageState extends State<OtpPage> {
                         hintText: "Enter OTP",
                         prefixIcon: Icon(Icons.password),
                         labelText: "OTP",
-                        suffix: TextButton(
-                      onPressed: () => send(),
-                      child: Text('Send OTP'),
-                    ),
                       ),
                       controller: otpController,
                       validator: (value) {
