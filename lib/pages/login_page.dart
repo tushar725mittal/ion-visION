@@ -19,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool changeButton = false;
-  UserModel userModel = UserModel();
+  UserModel userModel = UserModel.getModel();
 
   final _formkey = GlobalKey<FormState>();
 
@@ -32,12 +32,13 @@ class _LoginPageState extends State<LoginPage> {
     });
     
     try {
-       await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password).then((value) => pushDetails(context));
+       await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password).then((value) => getDetails(context));
        await Future.delayed(Duration(milliseconds: 500));
       final auth = FirebaseAuth.instance;
         User? user = auth.currentUser;
         if (user!.emailVerified) {
-          await context.vxNav.push(Uri.parse(MyRoutes.otpRoute), params: {"email": emailController.text});
+          // await context.vxNav.push(Uri.parse(MyRoutes.otpRoute), params: {"email": emailController.text});
+          await context.vxNav.push(Uri.parse(MyRoutes.homeRoute));
         }
         else{
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: "Email not verified. Please verify email".text.make()));   
@@ -61,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  pushDetails(BuildContext context) async {
+  getDetails(BuildContext context) async {
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
       final _auth = FirebaseAuth.instance;
        User? user = _auth.currentUser;
@@ -73,6 +74,7 @@ class _LoginPageState extends State<LoginPage> {
           if (documentSnapshot.exists) {
             userModel.firstName = documentSnapshot.get("first name");
             userModel.secondName = documentSnapshot.get("second name");
+            print(userModel.firstName);
           }
         });
       // writing all the values

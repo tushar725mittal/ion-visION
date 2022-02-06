@@ -26,7 +26,7 @@ class _SignupPageState extends State<SignupPage> {
   final secondNameController = TextEditingController();
   final _auth = FirebaseAuth.instance;
   bool changeButton = false;
-  UserModel userModel = UserModel();
+  UserModel userModel = UserModel.getModel();
   final _formkey = GlobalKey<FormState>();
 
   signUP(BuildContext context) async {
@@ -191,28 +191,11 @@ class _SignupPageState extends State<SignupPage> {
                       decoration: InputDecoration(
                         hintText: "Enter password",
                         prefixIcon: Icon(Icons.password),
-                        labelText: "Password",
+                        labelText: "Confirm Password",
                       ),
                       controller: confirmPasswordController,
                       validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Password cannot be empty";
-                        } else if (value.contains(new RegExp(r'^(?=.*[a-z])$'))) {
-                          return "Password Should Contain at least one lowercase letter";
-                        }
-                        else if (value.contains(new RegExp(r'^(?=.*[A-Z])$'))) {
-                          return "Password Should Contain at least one uppercase letter";
-                        }
-                        else if (value.contains(new RegExp(r'^(?=.*?[!@#\$&*~])$'))) {
-                          return "Password Should Contain at least special character";
-                        }
-                        else if (value.contains(new RegExp(r'^(?=.*?[0-9])$'))) {
-                          return "Password Should Contain at least one number";
-                        }
-                        else if (value.length < 6) {
-                          return "Length of password should be atleast 6";
-                        }
-                        else if (passwordController.text != value){
+                        if (passwordController.text != value){
                           return "Password does not match";
                         }
                         return null;
