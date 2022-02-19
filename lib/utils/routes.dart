@@ -5,4 +5,6 @@ class MyRoutes{
   static String verifyRoute = "/verify";
   static String resetRoute = "/reset";
   static String otpRoute = "/otp";
+  static String newsRoute = "/news";
+  static String webRoute = "/web";
 }

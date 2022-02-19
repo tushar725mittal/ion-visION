@@ -84,7 +84,7 @@ class _ResetPageState extends State<ResetPage> {
                       decoration: InputDecoration(
                         hintText: "Enter your Email",
                         prefixIcon: Icon(CupertinoIcons.mail),
-                        labelText: "Email",
+                        labelText: "Registered Email",
                       ),
                       controller: emailController,
                       validator: (value) {
@@ -118,11 +118,11 @@ class _ResetPageState extends State<ResetPage> {
                                   color: Colors.white,
                                 )
                               : Text(
-                                  "Login",
+                                  "Send Reset Link",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 18),
+                                      fontSize: 14),
                                 ),
                         ),
                       ),

@@ -37,8 +37,8 @@ class _LoginPageState extends State<LoginPage> {
       final auth = FirebaseAuth.instance;
         User? user = auth.currentUser;
         if (user!.emailVerified) {
-          // await context.vxNav.push(Uri.parse(MyRoutes.otpRoute), params: {"email": emailController.text});
-          await context.vxNav.push(Uri.parse(MyRoutes.homeRoute));
+          await context.vxNav.push(Uri.parse(MyRoutes.otpRoute), params: {"email": emailController.text});
+          // await context.vxNav.push(Uri.parse(MyRoutes.homeRoute));
         }
         else{
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: "Email not verified. Please verify email".text.make()));   
