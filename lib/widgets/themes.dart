@@ -11,34 +11,33 @@ class MyTheme {
         accentColor: darkbluishColor,
         buttonColor: darkbluishColor,
         appBarTheme: AppBarTheme(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        iconTheme: IconThemeData(
-          color: Colors.black,
-        ),
-        titleTextStyle: TextStyle(color: Colors.black),
+          backgroundColor: Colors.white,
+          elevation: 0,
+          iconTheme: IconThemeData(
+            color: Colors.black,
+          ),
+          titleTextStyle: TextStyle(color: Colors.black),
         ),
       );
 
   static ThemeData darkTheme(BuildContext context) => ThemeData(
-    brightness: Brightness.dark,
-        cardColor: Colors.black,
-        canvasColor: darkcreamColor,
-        buttonColor: lightbluishColor,
-        accentColor: Colors.white,
-        fontFamily: GoogleFonts.poppins().fontFamily,
-        appBarTheme: AppBarTheme(
+      brightness: Brightness.dark,
+      cardColor: Colors.black,
+      canvasColor: darkcreamColor,
+      buttonColor: lightbluishColor,
+      accentColor: Colors.white,
+      fontFamily: GoogleFonts.poppins().fontFamily,
+      appBarTheme: AppBarTheme(
         backgroundColor: Colors.white,
         elevation: 0,
         iconTheme: IconThemeData(
-        color: Colors.white,
+          color: Colors.white,
         ),
-        )
-      );
+      ));
 
-      //Colors
-      static Color creamColor = Color(0xfff5f5f5);
-      static Color darkcreamColor = Vx.gray900;
-      static Color darkbluishColor = Color(0xff403b58);
-      static Color lightbluishColor = Vx.indigo500;
+  //Colors
+  static Color creamColor = Color(0xfff5f5f5);
+  static Color darkcreamColor = Vx.gray900;
+  static Color darkbluishColor = Color(0xff403b58);
+  static Color lightbluishColor = Vx.indigo500;
 }

@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:vision/models/crytpo_model.dart';
 import 'package:vision/widgets/cryptoCard.dart';
 
-
 class Crypto extends StatefulWidget {
   var editingController = TextEditingController();
   Crypto({Key? key}) : super(key: key);
@@ -17,7 +16,7 @@ class Crypto extends StatefulWidget {
 class _CryptoState extends State<Crypto> {
   String realCurr = "INR";
   String interval = "1d";
-    List<Currency> passedList = [];
+  List<Currency> passedList = [];
   Future<void> getCurrency() async {
     List<Currency> newCurrList = [];
     final response = await http.get(Uri.parse(
@@ -33,13 +32,13 @@ class _CryptoState extends State<Crypto> {
             newCurrList.add(Currency.fromJson(map, interval));
           }
         }
-        if(this.mounted){
-            setState(() {});
+        if (this.mounted) {
+          setState(() {});
         }
       }
       currList = newCurrList;
       passedList = currList;
-    } 
+    }
   }
 
   @override
@@ -49,7 +48,7 @@ class _CryptoState extends State<Crypto> {
     super.initState();
   }
 
- @override
+  @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
     super.dispose();
@@ -58,105 +57,110 @@ class _CryptoState extends State<Crypto> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.blue[300],
-          title: const Text(
-            'Crypto Space',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        body: (passedList == null)? CircularProgressIndicator():Container(
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [ 
-                  Container(
-                    color: Colors.lime[50],
-                    width: 200,
-                    child: TextField(
-                    onChanged: (value) {      
-                          passedList = currList.where((element) => element.name!.startsWith(value)).toList();
-                          if(this.mounted){
-                              setState(() {});
-                          }                              
-                    },
-                    controller: widget.editingController,
-                    decoration: InputDecoration(
-                        labelText: "Search",
-                        hintText: "Search",
-                        prefixIcon: Icon(Icons.search),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(25.0)))),
-                ),
-                  ),
-                  Container(
-                    width: 80,
-                    child: Card(
-                      elevation: 50,
-                      child: PopupMenuButton<String>(
-                                  icon: Row(children: [Text(realCurr), Icon(Icons.arrow_drop_down)]),
+      // appBar: CustAppBar(mode_name: "CRYPTO",),
+      body: (passedList == null)
+          ? CircularProgressIndicator()
+          : Container(
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            color: Colors.lime[50],
+                            width: MediaQuery.of(context).size.width/2,
+                            child: TextField(
+                              onChanged: (value) {
+                                passedList = currList
+                                    .where((element) =>
+                                        element.name!.startsWith(value))
+                                    .toList();
+                                if (this.mounted) {
+                                  setState(() {});
+                                }
+                              },
+                              controller: widget.editingController,
+                              decoration: InputDecoration(
+                                  labelText: "Search",
+                                  hintText: "Search",
+                                  prefixIcon: Icon(Icons.search),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(25.0)))),
+                            ),
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width/4.5,
+                            child: Card(
+                              color: Color(0xFFCBE6F2),
+                              elevation: 50,
+                              child: PopupMenuButton<String>(
+                                  icon: Row(children: [
+                                    Text(realCurr),
+                                    Icon(Icons.arrow_drop_down)
+                                  ]),
                                   onSelected: (item) {
                                     realCurr = item;
                                     getCurrency();
-                                    if(this.mounted){
-                                      setState(() {
-                                      });
+                                    if (this.mounted) {
+                                      setState(() {});
                                     }
                                   },
                                   itemBuilder: (context) => [
-                                    PopupMenuItem<String>(child: Text("INR"), value: "INR"),
-                                    PopupMenuItem<String>(child: Text("USD"), value: "USD"),
-                                    PopupMenuItem<String>(child: Text("EUR"), value: "EUR"),
+                                        PopupMenuItem<String>(
+                                            child: Text("INR"), value: "INR"),
+                                        PopupMenuItem<String>(
+                                            child: Text("USD"), value: "USD"),
+                                        PopupMenuItem<String>(
+                                            child: Text("EUR"), value: "EUR"),
+                                      ]),
+                            ),
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width/4.5,
+                            child: Card(
+                              color: Color(0xFFCBE6F2),
+                              elevation: 50,
+                              child: PopupMenuButton<String>(
+                                  icon: Row(children: [
+                                    Text(interval),
+                                    Icon(Icons.arrow_drop_down)
                                   ]),
-                    ),
-                  ),
-                  Container(
-                    width: 80,
-                    child: Card(
-                      elevation: 50,
-                      child: PopupMenuButton<String>(
-                                  icon: Row(children: [Text(interval), Icon(Icons.arrow_drop_down)]),
                                   onSelected: (item) {
                                     interval = item;
                                     getCurrency();
-                                    if(this.mounted){
-                                      setState(() {
-                                      });
+                                    if (this.mounted) {
+                                      setState(() {});
                                     }
                                   },
                                   itemBuilder: (context) => [
-                                    PopupMenuItem<String>(child: Text("1d"), value: "1d"),
-                                    PopupMenuItem<String>(child: Text("7d"), value: "7d"),
-                                    PopupMenuItem<String>(child: Text("30d"), value: "30d"),
-                                    PopupMenuItem<String>(child: Text("365d"), value: "365d"),
-                                    PopupMenuItem<String>(child: Text("ytd"), value: "ytd"),
-                                  ]),
-                    ),
-                  )
-                ]
+                                        PopupMenuItem<String>(
+                                            child: Text("1d"), value: "1d"),
+                                        PopupMenuItem<String>(
+                                            child: Text("7d"), value: "7d"),
+                                        PopupMenuItem<String>(
+                                            child: Text("30d"), value: "30d"),
+                                        PopupMenuItem<String>(
+                                            child: Text("365d"), value: "365d"),
+                                        PopupMenuItem<String>(
+                                            child: Text("ytd"), value: "ytd"),
+                                      ]),
+                            ),
+                          )
+                        ]),
+                  ),
+                  Expanded(
+                      child: ListView.builder(
+                    itemCount: passedList.length,
+                    itemBuilder: (context, index) {
+                      return CryptoDetails(currency: passedList[index]);
+                    },
+                  )),
+                ],
               ),
             ),
-            Expanded(
-              child: ListView.builder(
-          itemCount: passedList.length,
-          itemBuilder: (context, index) {
-            return CryptoDetails(
-              currency: passedList[index]
-            );
-          },
-        )
-            ),
-          ],
-        ),
-      ),
-        );
+    );
   }
 }
-

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:velocity_x/src/extensions/context_ext.dart';
+import 'package:velocity_x/velocity_x.dart';
 import 'package:vision/utils/routes.dart';
 
 class VerifyScreen extends StatefulWidget {
@@ -20,7 +20,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
     user = auth.currentUser;
     if (user!.emailVerified) {
       print("verified");
-    }else{
+    } else {
       user!.sendEmailVerification();
     }
 
@@ -39,9 +39,17 @@ class _VerifyScreenState extends State<VerifyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(
-            'Verification email sent to ${user!.email}. Plase verify to continue'),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/vision_background.png"),
+            fit: BoxFit.fill,
+          ),
+        ),
+        child: Center(
+          child: Text(
+              'Verification email sent to ${user!.email}. Plase verify to continue'),
+        ),
       ),
     );
   }

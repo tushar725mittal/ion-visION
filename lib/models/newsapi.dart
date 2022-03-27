@@ -14,8 +14,6 @@ class News {
     this.content,
   });
 
-  
-
   News copyWith({
     String? date,
     String? title,
@@ -56,13 +54,13 @@ class News {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is News &&
-      other.date == date &&
-      other.title == title &&
-      other.content == content;
+        other.date == date &&
+        other.title == title &&
+        other.content == content;
   }
 
   @override
   int get hashCode => date.hashCode ^ title.hashCode ^ content.hashCode;
-  }
+}
