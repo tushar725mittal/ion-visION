@@ -1,6 +1,8 @@
 # vision
 ![vision_logo_white](https://user-images.githubusercontent.com/89862963/163665009-f9e99109-90d2-4061-a146-a62c7da93679.png)
 
+TEAM members: Arya Gokhale, Tushar MItttal, Monish Kamtikar and Arpita Lenka.
+
 visION provides visual analysis of expenditure which motivates people to spend less and makes expense tracking, monitoring and analysis easier. This platform helps you plan your monthly budget, collects user expenditure data and simultaneously analyzes it to target personalized stacks of discount coupons relevant to the user’s purchases to help with their monthly savings. Local retailers can increase their online presence and companies attract more customers by showcasing their offers. Staying informed about relevant investment options and financial news to make sound decisions regarding personal finances. A single platform to connect with major broker platforms so that the user can access and analyze as per his requirements.
 
 Result of implementation: The solution is an app which will help users with * Budgeting, Saving and Investment * Access banking, brokerage and crypto websites within app * Achieve financial independence eventually
